@@ -20,6 +20,6 @@ public class ChocolateRepository {
     }
 
     public long addStock(String name){
-
+        return 0L;
     }
 }
