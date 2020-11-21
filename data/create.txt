@@ -1,8 +1,8 @@
 user (id, username, email, password)
-coklat (id, nama, harga, jumlah, deskripsi)
+coklat (id, nama, jumlah)
 bahan (id, nama, jumlah, kedaluwarsa)
 resep (id_coklat, bahan, jumlah, harga)  *tipe bahan dan jumlah adalah array of int
-add_stock (id, id_coklat, jumlah, status)
+request_add_stock (id, id_coklat, jumlah, status)
 saldo (id, jumlah)
 
 create table user (
@@ -13,10 +13,16 @@ create table user (
 
 create table coklat (
     id int primary key auto_increment,
-    nama varchar(256) not null,
-    harga int not null,
-    jumlah int not null,
-    deskripsi text
+    nama varchar(256) not null unique,
+    jumlah int not null default 0
+);
+
+create table request_add_stock (
+    id int primary key auto_increment,
+    id_coklat int not null,
+    jumlah int,
+    status varchar(255) default 'PENDING',
+    foreign key (id_coklat) references coklat(id)
 );
 
 create table bahan (
@@ -25,3 +31,7 @@ create table bahan (
     jumlah int not null,
     kedaluarsa timestamp
 );
+
+create table resep(
+);
+
