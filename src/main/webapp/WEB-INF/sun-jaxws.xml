@@ -3,9 +3,17 @@
     <endpoint
             name="HelloWebService"
             implementation="willywangky.service.Hello"
-            url-pattern="/hello"/>
+            url-pattern="/api/hello"/>
     <endpoint
             name="HelloWebService"
             implementation="willywangky.service.ChocolateService"
-            url-pattern="/chocolate-service"/>
+            url-pattern="/api/chocolate"/>
+    <endpoint
+            name="HelloWebService"
+            implementation="willywangky.service.StockService"
+            url-pattern="/api/stock"/>
+    <endpoint
+            name="HelloWebService"
+            implementation="willywangky.service.LoginService"
+            url-pattern="/api/login"/>
 </endpoints>
