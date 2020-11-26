@@ -14,4 +14,9 @@ public class LoginService {
     public Boolean isUserExist(String username, String password){
         return userRepository.isUserExist(username, password);
     }
+
+    @WebMethod
+    public String cek(){
+        return "cek";
+    }
 }
