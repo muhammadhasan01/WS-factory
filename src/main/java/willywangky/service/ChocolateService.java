@@ -1,6 +1,7 @@
 package willywangky.service;
 
 import willywangky.model.Chocolate;
+import willywangky.model.Resep;
 import willywangky.repository.ChocolateRepository;
 
 import javax.jws.WebMethod;
@@ -24,5 +25,15 @@ public class ChocolateService {
         }
     }
 
+    @WebMethod
+    public String addChocolate(Resep chocolateResep){
+        System.out.println(chocolateResep);
+        try {
+            return chocolateRepository.addChocolate(chocolateResep);
+        } catch (Exception e){
+            e.printStackTrace();
+            return "fail";
+        }
+    }
 
 }

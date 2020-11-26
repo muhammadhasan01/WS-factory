@@ -1,6 +1,8 @@
 package willywangky.repository;
 
+import willywangky.model.Bahan;
 import willywangky.model.Chocolate;
+import willywangky.model.Resep;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,4 +40,27 @@ public class ChocolateRepository {
         return false;
     }
 
+    public String addChocolate(Resep resep) throws SQLException {
+        String chocolateName = resep.getChocolateName();
+        List<Bahan> bahans = resep.getBahan();
+        ResultSet rs = this.conn.createStatement()
+                .executeQuery("SELECT * FROM coklat where nama='" + chocolateName + "'");
+
+        if (rs.next()){
+            return "Coklat sudah ada";
+        } else {
+            this.conn.createStatement()
+                    .executeUpdate("INSERT INTO coklat(nama, jumlah) values('" + chocolateName + "',0)");
+            rs = this.conn.createStatement()
+                    .executeQuery("SELECT count(*) FROM coklat");
+            rs.next();
+            Long id = rs.getLong(1);
+            for (Bahan b : bahans) {
+                this.conn.createStatement()
+                        .executeUpdate("INSERT INTO resep(id_coklat, nama_bahan, jumlah, harga) values(" +
+                                id + ",'" + b.getName() + "'," + b.getAmount() + "," + b.getPrice() + ")");
+            }
+            return "Add success";
+        }
+    }
 }

@@ -34,9 +34,15 @@ create table bahan (
     id int primary key auto_increment,
     nama varchar(255) not null,
     jumlah int not null,
-    kedaluarsa timestamp
+    kedaluarsa date
 );
 
 create table resep(
+    id int primary key auto_increment,
+    id_coklat int,
+    nama_bahan varchar(255) not null,
+    jumlah int,
+    harga int,
+    foreign key (id_coklat) references coklat(id)
 );
 

@@ -16,4 +16,12 @@
             name="HelloWebService"
             implementation="willywangky.service.LoginService"
             url-pattern="/api/login"/>
+    <endpoint
+            name="HelloWebService"
+            implementation="willywangky.service.ResepBahanService"
+            url-pattern="/api/resep-bahan"/>
+    <endpoint
+            name="HelloWebService"
+            implementation="willywangky.service.SaldoService"
+            url-pattern="/api/saldo"/>
 </endpoints>
