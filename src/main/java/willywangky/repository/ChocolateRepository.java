@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChocolateRepository {
-    public static final Connection conn = (new DBService()).getConnection();
+    public static final Connection conn = DBService.getDbService().getConnection();
 
     public List<Chocolate> getAllChocolate() throws SQLException {
         List<Chocolate> chocolates = new ArrayList<>();

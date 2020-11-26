@@ -25,6 +25,11 @@ create table request_add_stock (
     foreign key (id_coklat) references coklat(id)
 );
 
+create table saldo (
+    amount int not null,
+    CHECK (amount >= 0)
+);
+
 create table bahan (
     id int primary key auto_increment,
     nama varchar(255) not null,

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockRepository {
-    public static final Connection conn = (new DBService()).getConnection();
+    public static final Connection conn = DBService.getDbService().getConnection();
 
     public long addStock(String name, Long amount){
         try {

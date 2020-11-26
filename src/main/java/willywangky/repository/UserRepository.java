@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserRepository {
-    private static final Connection conn = (new DBService()).getConnection();
+    public static final Connection conn = DBService.getDbService().getConnection();
 
     public UserRepository(){
 
