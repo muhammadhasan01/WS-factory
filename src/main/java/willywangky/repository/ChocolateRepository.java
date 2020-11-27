@@ -64,8 +64,40 @@ public class ChocolateRepository {
         }
     }
 
-    public String chocolateProduction(){
-
+    public String chocolateProduction(String chocolateName, Long amountToProduce) throws SQLException {
+        ResepBahanRepository resepBahanRepository = new ResepBahanRepository();
+        Resep resep = resepBahanRepository.getResepFromName(chocolateName).get(0);
+        List<Bahan> listBahan = resepBahanRepository.getAllBahan();
+        for (Bahan b: resep.getBahan()) {
+            for (Bahan bSimpanan: listBahan) {
+                if (b.getName().equals(bSimpanan.getName()) && b.getAmount() * amountToProduce > bSimpanan.getAmount()) {
+                    return "bahan tidak cukup";
+                }
+            }
+        }
+        for (Bahan b: resep.getBahan()) {
+            Long bahanToBeConsumed = b.getAmount() * amountToProduce;            
+            for (Bahan bSimpanan: listBahan) {
+                if (b.getName().equals(bSimpanan.getName())) {
+                    Long bSimpananAmount = bSimpanan.getAmount();
+                    if (bahanToBeConsumed >= bSimpananAmount) {
+                        bahanToBeConsumed -= bSimpananAmount;
+                        bSimpananAmount = 0L;
+                    } else {
+                        bSimpananAmount -= bahanToBeConsumed;
+                        bahanToBeConsumed = 0L;
+                    }
+                    this.conn.createStatement()
+                            .executeUpdate("UPDATE bahan SET jumlah="
+                            + String.valueOf(bSimpananAmount)
+                            + " WHERE nama="
+                            + b.getName()
+                            + " AND kedaluarsa > CURDATE() LIMIT 1");
+                }
+            }
+        }
+        this.conn.createStatement()
+                .executeUpdate("UPDATE coklat SET jumlah=jumlah+" + String.valueOf(amountToProduce))
         return "success";
     }
 }

@@ -36,4 +36,15 @@ public class ChocolateService {
         }
     }
 
+    @WebMethod
+    public String produceChocolate(String chocolateName, Long amountToProduce){
+        System.out.println(chocolateName);
+        try {
+            return chocolateRepository.chocolateProduction(chocolateName, amountToProduce);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
+    }
+
 }
