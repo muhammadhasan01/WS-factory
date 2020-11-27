@@ -97,7 +97,7 @@ public class ChocolateRepository {
             }
         }
         this.conn.createStatement()
-                .executeUpdate("UPDATE coklat SET jumlah=jumlah+" + String.valueOf(amountToProduce))
+                .executeUpdate("UPDATE coklat SET jumlah=jumlah+" + String.valueOf(amountToProduce));
         return "success";
     }
 }
