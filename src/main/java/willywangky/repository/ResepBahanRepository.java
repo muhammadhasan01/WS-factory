@@ -39,13 +39,11 @@ public class ResepBahanRepository {
             Bahan b = new Bahan();
             b.setName(rs.getString("nama_bahan"));
             b.setAmount(rs.getLong("jumlah"));
-            b.setPrice(rs.getLong("harga"));
             bahan.add(b);
             while (rs.next() && rs.getString("nama").equals(r.getChocolateName())) {
                 b = new Bahan();
                 b.setName(rs.getString("nama_bahan"));
                 b.setAmount(rs.getLong("jumlah"));
-                b.setPrice(rs.getLong("harga"));
                 bahan.add(b);
             }
             rs.previous();

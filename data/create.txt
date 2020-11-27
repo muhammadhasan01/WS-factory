@@ -1,7 +1,7 @@
 user (id, username, email, password)
 coklat (id, nama, jumlah)
 bahan (id, nama, jumlah, kedaluwarsa)
-resep (id_coklat, bahan, jumlah, harga)  *tipe bahan dan jumlah adalah array of int
+resep (id_coklat, bahan, jumlah)  *tipe bahan dan jumlah adalah array of int
 request_add_stock (id, id_coklat, jumlah, status)
 saldo (id, jumlah)
 
@@ -42,7 +42,6 @@ create table resep(
     id_coklat int,
     nama_bahan varchar(255) not null,
     jumlah int,
-    harga int,
     foreign key (id_coklat) references coklat(id)
 );
 

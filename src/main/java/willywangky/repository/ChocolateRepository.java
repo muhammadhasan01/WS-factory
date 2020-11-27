@@ -57,8 +57,8 @@ public class ChocolateRepository {
             Long id = rs.getLong(1);
             for (Bahan b : bahans) {
                 this.conn.createStatement()
-                        .executeUpdate("INSERT INTO resep(id_coklat, nama_bahan, jumlah, harga) values(" +
-                                id + ",'" + b.getName() + "'," + b.getAmount() + "," + b.getPrice() + ")");
+                        .executeUpdate("INSERT INTO resep(id_coklat, nama_bahan, jumlah) values(" +
+                                id + ",'" + b.getName() + "'," + b.getAmount() + ")");
             }
             return "Add success";
         }
