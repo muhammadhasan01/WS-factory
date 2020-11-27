@@ -68,7 +68,7 @@ public class ResepBahanRepository {
 
     public List<Resep> getResepFromName(String chocolateName) throws SQLException {
         List<Resep> resep = new ArrayList<>();
-        ResultSet rs = this.conn.prepareStatement("select nama,nama_bahan, resep.jumlah from coklat inner join resep on coklat.id=resep.id_coklat where nama=" + chocolateName + " order by nama asc",
+        ResultSet rs = this.conn.prepareStatement("select nama,nama_bahan, resep.jumlah from coklat inner join resep on coklat.id=resep.id_coklat where nama='" + chocolateName + "' order by nama asc",
                 ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery();
 
         while(rs.next()){

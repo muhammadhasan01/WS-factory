@@ -83,13 +83,14 @@ public class ChocolateRepository {
                 Long bSimpananAmount = bSimpanan.getAmount();
                 long before = bSimpananAmount;
                 long mini = Math.min(bahanToBeConsumed, bSimpananAmount);
-                bahanToBeConsumed -= mini, bSimpananAmount -= mini;
+                bahanToBeConsumed -= mini;
+                bSimpananAmount -= mini;
                 this.conn.createStatement()
                         .executeUpdate("UPDATE bahan SET jumlah="
-                        + String.valueOf(bSimpananAmount)
-                        + " WHERE nama="
+                        + bSimpananAmount
+                        + " WHERE nama='"
                         + b.getName()
-                        + " AND jumlah="
+                        + "' AND jumlah="
                         + before
                         + " AND kedaluarsa > CURDATE() LIMIT 1");
                 if (bahanToBeConsumed == 0L) {
@@ -98,7 +99,7 @@ public class ChocolateRepository {
             }
         }
         this.conn.createStatement()
-                .executeUpdate("UPDATE coklat SET jumlah=jumlah+" + String.valueOf(amountToProduce) + " where nama=" + chocolateName);
+                .executeUpdate("UPDATE coklat SET jumlah=jumlah+" + String.valueOf(amountToProduce) + " where nama='" + chocolateName + "'");
         return "success";
     }
 }
