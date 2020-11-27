@@ -1,6 +1,7 @@
 package willywangky.repository;
 
 import willywangky.model.Chocolate;
+import willywangky.model.RequestAddStock;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -54,7 +55,23 @@ public class StockRepository {
                     .executeUpdate("UPDATE coklat" +
                             " SET jumlah=" + newChocolateAmount +
                             " WHERE id=" + idChocolate);
-            return "Penambahan coklat sukses";
+            return "Permintaan berhasil disetujui";
         }
+    }
+
+    public List<RequestAddStock> getAllReqAddStock() throws SQLException {
+        List<RequestAddStock> req = new ArrayList<>();
+        ResultSet rs = this.conn.createStatement()
+                .executeQuery("SELECT request_add_stock.id as id, nama, request_add_stock.jumlah as jumlah" +
+                        " from coklat inner join request_add_stock on coklat.id=request_add_stock.id_coklat " +
+                        "WHERE status='PENDING'");
+        while(rs.next()){
+            RequestAddStock r = new RequestAddStock();
+            r.setId(rs.getLong("id"));
+            r.setAmount(rs.getLong("jumlah"));
+            r.setChocolateName(rs.getString("nama"));
+            req.add(r);
+        }
+        return req;
     }
 }

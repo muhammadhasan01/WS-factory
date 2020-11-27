@@ -1,11 +1,14 @@
 package willywangky.service;
 
+import willywangky.model.RequestAddStock;
 import willywangky.repository.ChocolateRepository;
 import willywangky.repository.StockRepository;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT)
@@ -33,6 +36,16 @@ public class StockService {
         } catch (Exception e) {
             e.printStackTrace();
             return "Gagal Approve";
+        }
+    }
+
+    @WebMethod
+    public List<RequestAddStock> getAllReqAddStock(){
+        System.out.println("Masuk ke getAllreq");
+        try {
+            return stockRepository.getAllReqAddStock();
+        } catch (Exception e){
+            return new ArrayList<>();
         }
     }
 }

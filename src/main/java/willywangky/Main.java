@@ -1,8 +1,5 @@
 package willywangky;
 
-import willywangky.repository.ChocolateRepository;
-import willywangky.repository.ResepBahanRepository;
-import willywangky.repository.SaldoRepository;
 import willywangky.service.*;
 
 import javax.xml.ws.Endpoint;
@@ -19,10 +16,5 @@ public class Main {
         Endpoint.publish("http://localhost:8081/api/resep-bahan", new ResepBahanService());
         Endpoint.publish("http://localhost:8081/api/saldo", new SaldoService());
 
-
-//        ResepBahanRepository r = new ResepBahanRepository();
-//        System.out.println(r.getAllResep());
-//        System.out.println(r.getAllBahan());
-//
     }
 }

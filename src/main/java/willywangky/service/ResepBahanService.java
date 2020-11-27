@@ -27,7 +27,10 @@ public class ResepBahanService {
 
     @WebMethod
     public List<Resep> getAllResep(){
+        System.out.println("masuk get All bahan");
         try {
+            System.out.println("berhasil ret getAllResep");
+            System.out.println(resepBahanRepository.getAllResep());
             return resepBahanRepository.getAllResep();
         } catch (Exception e){
             return new ArrayList<>();
