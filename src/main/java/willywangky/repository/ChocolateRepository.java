@@ -75,31 +75,26 @@ public class ChocolateRepository {
                 }
             }
         }
+        List<Bahan> listBahanIndividual = resepBahanRepository.getAllBahanIndividually();
         for (Bahan b: resep.getBahan()) {
             Long bahanToBeConsumed = b.getAmount() * amountToProduce;            
-            for (Bahan bSimpanan: listBahan) {
-                if (b.getName().equals(bSimpanan.getName())) {
-                    Long bSimpananAmount = bSimpanan.getAmount();
-                    if (bahanToBeConsumed >= bSimpananAmount) {
-                        bahanToBeConsumed -= bSimpananAmount;
-                        bSimpananAmount = 0L;
-                    } else {
-                        bSimpananAmount -= bahanToBeConsumed;
-                        bahanToBeConsumed = 0L;
-                    }
-                    this.conn.createStatement()
-                            .executeUpdate("UPDATE bahan SET jumlah="
-                            + String.valueOf(bSimpananAmount)
-                            + " WHERE nama="
-                            + b.getName()
-                            + " AND kedaluarsa > CURDATE() LIMIT 1");
-                    if (bahanToBeConsumed == 0L) {
-                        break;
-                    }
+            for (Bahan bSimpanan: listBahanIndividual) {
+                if (!b.getName().equals(bSimpanan.getName())) continue;
+                Long bSimpananAmount = bSimpanan.getAmount();
+                long before = bSimpananAmount;
+                long mini = Math.min(bahanToBeConsumed, bSimpananAmount);
+                bahanToBeConsumed -= mini, bSimpananAmount -= mini;
+                this.conn.createStatement()
+                        .executeUpdate("UPDATE bahan SET jumlah="
+                        + String.valueOf(bSimpananAmount)
+                        + " WHERE nama="
+                        + b.getName()
+                        + " AND jumlah="
+                        + before
+                        + " AND kedaluarsa > CURDATE() LIMIT 1");
+                if (bahanToBeConsumed == 0L) {
+                    break;
                 }
-            }
-            if (bahanToBeConsumed == 0L) {
-                break;
             }
         }
         this.conn.createStatement()

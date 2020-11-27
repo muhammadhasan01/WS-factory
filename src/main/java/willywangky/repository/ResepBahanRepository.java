@@ -26,6 +26,19 @@ public class ResepBahanRepository {
         return bahan;
     }
 
+    public List<Bahan> getAllBahanIndividually() throws SQLException {
+        List<Bahan> bahan = new ArrayList<>();
+        ResultSet rs = this.conn.createStatement()
+                .executeQuery("SELECT nama, jumlah FROM bahan WHERE kedaluarsa > CURDATE()");
+        while(rs.next()){
+            Bahan b = new Bahan();
+            b.setName(rs.getString("nama"));
+            b.setAmount(rs.getLong("jumlah"));
+            bahan.add(b);
+        }
+        return bahan;
+    }
+
     public List<Resep> getAllResep() throws SQLException {
         List<Resep> resep = new ArrayList<>();
         ResultSet rs = this.conn.prepareStatement("select nama,nama_bahan, resep.jumlah from coklat inner join resep on coklat.id=resep.id_coklat order by nama asc",
