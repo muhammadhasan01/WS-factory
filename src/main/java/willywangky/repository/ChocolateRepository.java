@@ -93,7 +93,13 @@ public class ChocolateRepository {
                             + " WHERE nama="
                             + b.getName()
                             + " AND kedaluarsa > CURDATE() LIMIT 1");
+                    if (bahanToBeConsumed == 0L) {
+                        break;
+                    }
                 }
+            }
+            if (bahanToBeConsumed == 0L) {
+                break;
             }
         }
         this.conn.createStatement()
