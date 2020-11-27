@@ -63,4 +63,9 @@ public class ChocolateRepository {
             return "Add success";
         }
     }
+
+    public String chocolateProduction(){
+
+        return "success";
+    }
 }
