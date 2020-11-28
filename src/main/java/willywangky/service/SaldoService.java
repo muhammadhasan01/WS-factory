@@ -17,6 +17,7 @@ public class SaldoService {
         try {
             return saldoRepository.getSaldo();
         } catch (Exception e){
+            e.printStackTrace();
             return -1L;
         }
     }
@@ -26,6 +27,24 @@ public class SaldoService {
         try {
             if (amount > 0) {
                 if (saldoRepository.setSaldo(amount) > 0) {
+                    return "Success";
+                } else {
+                    return "Fail";
+                }
+            } else {
+                return "Fail";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return "Fail";
+        }
+    }
+
+    @WebMethod
+    public String addSaldo(Long amount){
+        try {
+            if (amount > 0) {
+                if (saldoRepository.addSaldo(amount) > 0) {
                     return "Success";
                 } else {
                     return "Fail";

@@ -48,4 +48,14 @@ public class StockService {
             return new ArrayList<>();
         }
     }
+
+    @WebMethod
+    public String checkStatus(Long idReqAddStock){
+        try {
+            return stockRepository.checkStatus(idReqAddStock);
+        } catch (Exception e){
+            e.printStackTrace();
+            return "FAIL";
+        }
+    }
 }

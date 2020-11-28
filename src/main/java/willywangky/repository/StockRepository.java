@@ -16,9 +16,9 @@ public class StockRepository {
     public long addStock(String name, Long amount){
         try {
             Statement smt = this.conn.createStatement();
-//            String sql = "insert into request_add_stock(id_coklat, jumlah) values((select id from coklat where nama='" +
-//                    name + "')," + String.valueOf(amount) + ")";
-//            ResultSet res = smt.executeQuery(sql);
+            String sql = "insert into request_add_stock(id_coklat, jumlah) values((select id from coklat where nama='" +
+                    name + "')," + String.valueOf(amount) + ")";
+            smt.executeUpdate(sql);
             ResultSet rs = smt.executeQuery("SELECT count(*) from request_add_stock");
             rs.next();
             return rs.getLong(1);
@@ -73,5 +73,12 @@ public class StockRepository {
             req.add(r);
         }
         return req;
+    }
+
+    public String checkStatus(Long idReqAddStock) throws SQLException {
+        ResultSet rs = this.conn.createStatement()
+                .executeQuery("SELECT status FROM request_add_stock WHERE id=" + idReqAddStock);
+        rs.next();
+        return rs.getString(1);
     }
 }

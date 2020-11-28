@@ -17,6 +17,11 @@ public class SaldoRepository {
 
     public int setSaldo(Long amount) throws SQLException {
         return  this.conn.createStatement()
-                .executeUpdate("UPDATE saldo SET amount = amount");
+                .executeUpdate("UPDATE saldo SET amount=" + amount);
+    }
+
+    public int addSaldo(Long amount) throws SQLException {
+        return  this.conn.createStatement()
+                .executeUpdate("UPDATE saldo SET amount=amount+" + amount);
     }
 }
