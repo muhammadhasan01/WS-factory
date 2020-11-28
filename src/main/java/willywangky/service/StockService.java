@@ -20,7 +20,7 @@ public class StockService {
     // add stock , return value adalah id hasil add stock (untuk cek status pending atau tiddak)
     // kalau gagal, return -1 (coklat tidak ada pada daftar)
     public Long addStock(String name, Long amount){
-        if (chocolateRepository.isChocolateExist(name) || amount < 0){
+        if (!chocolateRepository.isChocolateExist(name) || amount < 0){
             return -1L;
         } else {
             // add chocolate

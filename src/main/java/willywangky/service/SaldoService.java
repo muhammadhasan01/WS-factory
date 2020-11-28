@@ -22,10 +22,10 @@ public class SaldoService {
     }
 
     @WebMethod
-    public String addSaldo(Long amount){
+    public String setSaldo(Long amount){
         try {
             if (amount > 0) {
-                if (saldoRepository.addSaldo(amount) > 0) {
+                if (saldoRepository.setSaldo(amount) > 0) {
                     return "Success";
                 } else {
                     return "Fail";
